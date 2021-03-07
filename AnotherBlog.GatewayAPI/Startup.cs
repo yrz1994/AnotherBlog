@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using Ocelot.Provider.Consul;
 
 namespace AnotherBlog.GatewayAPI
 {
@@ -22,11 +22,10 @@ namespace AnotherBlog.GatewayAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "AnotherBlog.GatewayAPI", Version = "v1" });
-            });
-            services.AddOcelot(new ConfigurationBuilder().AddJsonFile("ocelot.json").Build());
+            var ocelotConfig = new ConfigurationBuilder().AddJsonFile("ocelot.json", false, true).Build();
+            services.AddOcelot(ocelotConfig)
+                    .AddConsul()
+                    .AddConfigStoredInConsul();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,8 +34,6 @@ namespace AnotherBlog.GatewayAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AnotherBlog.GatewayAPI v1"));
             }
 
             await app.UseOcelot();

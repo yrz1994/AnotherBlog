@@ -3,24 +3,28 @@
     {
       "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5002
-        }
-      ],
+      "UseServiceDiscovery": true,
+      "ServiceName": "ArticleService",
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
       "UpstreamPathTemplate": "/article/{everything}"
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5003
-        }
-      ],
-      "UpstreamPathTemplate": "/comment/{everything}",
+      "UseServiceDiscovery": true,
+      "ServiceName": "CommentService",
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      //"DownstreamHostAndPorts": [
+      //  {
+      //    "Host": "localhost",
+      //    "Port": 5003
+      //  }
+      //],
+      "UpstreamPathTemplate": "/comment/{everything}"
       //"RateLimitOptions": {
       //  "ClientWhitelist": [],
       //  "EnableRateLimiting": true,
@@ -31,6 +35,12 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:5001"
+    "BaseUrl": "http://localhost:5001",
+    "ServiceDiscoveryProvider": {
+      "Host": "localhost",
+      "Port": 8500,
+      "Type": "Consul",
+      "ConfigurationKey": "Gateway"
+    }
   }
 }
