@@ -1,11 +1,11 @@
 # AnotherBlog
 
 AnotherBlog.GatewayAPI
-	Address£ºhttps://localhost:5001;
+	Address:https://localhost:5001;
 
 
 AnotherBlog.ArticleAPI
-	Address£ºhttps://localhost:5002;
+	Address:https://localhost:5002;
 
 AnotherBlog.CommentAPI
-	Address£ºhttps://localhost:5003;
+	Address:https://localhost:5003;

@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7 - UnitTest", "7 - UnitTes
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Docs", "0 - Docs", "{6C90EEFE-D7DE-49BA-BBEA-485A0EB7C3E7}"
 	ProjectSection(SolutionItems) = preProject
+		docker-compose.yaml = docker-compose.yaml
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -35,6 +36,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnotherBlog.ArticleAPI", "AnotherBlog.ArticleAPI\AnotherBlog.ArticleAPI.csproj", "{A98DEB7A-5C9D-4825-8606-3C05B0462879}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnotherBlog.CommentAPI", "AnotherBlog.CommentAPI\AnotherBlog.CommentAPI.csproj", "{510A7F8A-3196-483B-A072-0F45763F237D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6.1 - CrossCutting", "6.1 - CrossCutting", "{6BEA442A-740E-4955-ADF5-DC4A83F2284F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnotherBlog.Infra.ConsulRegister", "AnotherBlog.Infra.ConsulRegister\AnotherBlog.Infra.ConsulRegister.csproj", "{C0DCD800-322F-49F3-BBE4-D638BE689E2D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +63,10 @@ Global
 		{510A7F8A-3196-483B-A072-0F45763F237D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{510A7F8A-3196-483B-A072-0F45763F237D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{510A7F8A-3196-483B-A072-0F45763F237D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0DCD800-322F-49F3-BBE4-D638BE689E2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0DCD800-322F-49F3-BBE4-D638BE689E2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0DCD800-322F-49F3-BBE4-D638BE689E2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0DCD800-322F-49F3-BBE4-D638BE689E2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,6 +79,8 @@ Global
 		{4ED1C46B-C012-43B5-B32E-78EECF1DAB79} = {46F7A409-2F18-4C06-AAAD-80DBAAA8D664}
 		{A98DEB7A-5C9D-4825-8606-3C05B0462879} = {6C2F2BAF-C7BF-45E3-9508-FEC9C5CD90EA}
 		{510A7F8A-3196-483B-A072-0F45763F237D} = {B81E7ADA-3546-4179-ADFB-ED49271E3C86}
+		{6BEA442A-740E-4955-ADF5-DC4A83F2284F} = {01ED610F-EE12-47C8-93C2-69A7AEF46AD0}
+		{C0DCD800-322F-49F3-BBE4-D638BE689E2D} = {6BEA442A-740E-4955-ADF5-DC4A83F2284F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EEA9D18C-6E9D-4821-994E-A0959F3564AE}

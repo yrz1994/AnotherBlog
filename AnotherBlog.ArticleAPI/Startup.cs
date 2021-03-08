@@ -1,11 +1,10 @@
-using Consul;
+using AnotherBlog.Infra.ConsulRegister;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System;
 
 namespace AnotherBlog.ArticleAPI
 {
@@ -26,15 +25,10 @@ namespace AnotherBlog.ArticleAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Article.WebAPI", Version = "v1" });
             });
-
-            services.AddSingleton<IConsulClient>(sp =>
-            {
-                return new ConsulClient(c => { c.Address = new Uri(Configuration["Consul:Address"]); c.Datacenter = Configuration["Consul:Datacenter"]; });
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime lifetime, IConsulClient consulClient)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime lifetime)
         {
             if (env.IsDevelopment())
             {
@@ -47,14 +41,12 @@ namespace AnotherBlog.ArticleAPI
 
             app.UseAuthorization();
 
-            app.UseHealth();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
 
-            app.AgentServiceRegister(lifetime, Configuration, consulClient);
+            app.AgentServiceRegister(lifetime, Configuration);
         }
     }
 }

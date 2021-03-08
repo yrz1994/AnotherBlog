@@ -6,26 +6,31 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace AnotherBlog.ArticleAPI
+namespace AnotherBlog.Infra.ConsulRegister
 {
     public static class ConsulRegister
     {
         public static IApplicationBuilder AgentServiceRegister(this IApplicationBuilder app, IHostApplicationLifetime lifetime,
-            IConfiguration configuration, IConsulClient consulClient)
+            IConfiguration configuration)
         {
-            var serviceName = configuration["ServiceName"];
-            var scheme = "http";//configuration["scheme"];
-            var ip = "127.0.0.1";// configuration["ip"];
-            var port = "5002";// configuration["port"];
+            var scheme = configuration["scheme"];
+            var ip = configuration["ip"];
+            var port = configuration["port"];
+            var serviceName = configuration["Consul:ServiceName"];
             var registrationId = GetRegistrationId();
+            var consulClient = new ConsulClient(c =>
+            {
+                c.Address = new Uri(configuration["Consul:Address"]);
+                c.Datacenter = configuration["Consul:Datacenter"];
+            });
 
             lifetime.ApplicationStarted.Register(() =>
             {
                 var healthCheck = new AgentServiceCheck
                 {
-                    DeregisterCriticalServiceAfter = TimeSpan.FromSeconds(10),
+                    DeregisterCriticalServiceAfter = TimeSpan.FromMinutes(30),
                     Interval = TimeSpan.FromSeconds(10),
-                    HTTP = $"{scheme}://{ip}:{port}/health",
+                    HTTP = $"{scheme}://{ip}:{port}{configuration["Consul:HealthPath"]}",
                     Timeout = TimeSpan.FromSeconds(5),
                     TLSSkipVerify = true
                 };
@@ -46,6 +51,8 @@ namespace AnotherBlog.ArticleAPI
             {
                 consulClient.Agent.ServiceDeregister(registrationId).Wait();
             });
+
+            app.UseMiddleware<HealthMiddleware>();
 
             return app;
         }

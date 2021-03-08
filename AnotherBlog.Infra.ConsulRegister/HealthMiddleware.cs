@@ -1,37 +1,24 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace AnotherBlog.ArticleAPI
+namespace AnotherBlog.Infra.ConsulRegister
 {
-    public static class UseHealthMiddleware
-    {
-        public static void UseHealth(this IApplicationBuilder app)
-        {
-            app.UseMiddleware<HealthMiddleware>();
-        }
-    }
-    
     public class HealthMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly string _healthPath = "/health";
+        private readonly string _healthPath;
 
         public HealthMiddleware(RequestDelegate next, IConfiguration configuration)
         {
             _next = next;
-            var healthPath = configuration["Consul:HealthPath"];
-            if (!string.IsNullOrEmpty(healthPath))
-            {
-                _healthPath = healthPath;
-            }
+            _healthPath = configuration["Consul:HealthPath"];
         }
 
         public async Task Invoke(HttpContext httpContext)
         {
-            if (httpContext.Request.Path == this._healthPath)
+            if (httpContext.Request.Path == _healthPath)
             {
                 httpContext.Response.StatusCode = (int)HttpStatusCode.OK;
                 await httpContext.Response.WriteAsync("I'm OK!");

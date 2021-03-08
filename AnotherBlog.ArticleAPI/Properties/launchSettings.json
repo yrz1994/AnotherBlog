@@ -3,7 +3,7 @@
   "profiles": {
     "AnotherBlog.ArticleAPI": {
       "commandName": "Project",
-      "commandLineArgs": "--scheme http --ip localhost --port 5002",
+      "commandLineArgs": "--scheme http --ip host.docker.internal --port 5002",
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
