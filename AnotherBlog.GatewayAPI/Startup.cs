@@ -24,8 +24,8 @@ namespace AnotherBlog.GatewayAPI
             services.AddControllers();
             var ocelotConfig = new ConfigurationBuilder().AddJsonFile("ocelot.json", false, true).Build();
             services.AddOcelot(ocelotConfig)
-                    .AddConsul()
-                    .AddConfigStoredInConsul();
+                    .AddConsul();
+                    //.AddConfigStoredInConsul();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
