@@ -8,7 +8,8 @@
       "LoadBalancerOptions": {
         "Type": "LeastConnection"
       },
-      "UpstreamPathTemplate": "/article/{everything}"
+      "UpstreamPathTemplate": "/article/{everything}",
+      "Key": "Article"
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
@@ -18,23 +19,33 @@
       "LoadBalancerOptions": {
         "Type": "RoundRobin"
       },
-      "UpstreamPathTemplate": "/comment/{everything}"
-      //"RateLimitOptions": {
-      //  "ClientWhitelist": [],
-      //  "EnableRateLimiting": true,
-      //  "Period": "1s",
-      //  "PeriodTimespan": 1,
-      //  "Limit": 1
-      //}
+      "UpstreamPathTemplate": "/comment/{everything}",
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1m",
+        "PeriodTimespan": 60,
+        "Limit": 100
+      },
+      "Key": "Comment"
     }
   ],
   "GlobalConfiguration": {
     "BaseUrl": "https://localhost:5001",
+    "RequestIdKey": "OcRequestId",
     "ServiceDiscoveryProvider": {
       "Host": "host.docker.internal",
       "Port": 8500,
-      "Type": "Consul",
       "ConfigurationKey": "Gateway"
     }
-  }
+  },
+  "Aggregates": [
+    {
+      "RouteKeys": [
+        "Article",
+        "Comment"
+      ],
+      "UpstreamPathTemplate": "/all/{everything}"
+    }
+  ]
 }
