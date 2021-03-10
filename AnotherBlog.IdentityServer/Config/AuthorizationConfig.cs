@@ -1,4 +1,5 @@
-﻿using IdentityServer4.Models;
+﻿using IdentityServer4;
+using IdentityServer4.Models;
 using System.Collections.Generic;
 
 namespace AnotherBlog.IdentityServer.Config
@@ -32,10 +33,10 @@ namespace AnotherBlog.IdentityServer.Config
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
 
-                    RedirectUris = { http://localhost:40011/signin-oidc },
+                    RedirectUris = { "http://localhost:40011/signin-oidc" },
 
                     // where to redirect to after logout
-                    PostLogoutRedirectUris = { http://localhost:40011/signout-callback-oidc },
+                    PostLogoutRedirectUris = { "http://localhost:40011/signout-callback-oidc" },
 
 
                     AllowedScopes = new List<string>
@@ -44,9 +45,7 @@ namespace AnotherBlog.IdentityServer.Config
                         IdentityServerConstants.StandardScopes.Profile,
                         "ProductApi",
                         IdentityServerConstants.ClaimValueTypes.Json
-                    }
-                    ,
-                    RequireConsent=false,//不需要确认授权页面,方便直接跳转
+                    },
                     AlwaysIncludeUserClaimsInIdToken=true
                 }
             };
