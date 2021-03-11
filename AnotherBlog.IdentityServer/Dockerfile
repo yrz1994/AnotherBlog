@@ -7,10 +7,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
-COPY ["AnotherBlog.IdentityServer/AnotherBlog.IdentityServer.csproj", "AnotherBlog.IdentityServer/"]
-RUN dotnet restore "AnotherBlog.IdentityServer/AnotherBlog.IdentityServer.csproj"
+COPY ["../AnotherBlog.IdentityServer/AnotherBlog.IdentityServer.csproj", "../AnotherBlog.IdentityServer/"]
+RUN dotnet restore "../AnotherBlog.IdentityServer/AnotherBlog.IdentityServer.csproj"
 COPY . .
-WORKDIR "/src/AnotherBlog.IdentityServer"
+WORKDIR "/src/../AnotherBlog.IdentityServer"
 RUN dotnet build "AnotherBlog.IdentityServer.csproj" -c Release -o /app/build
 
 FROM build AS publish
