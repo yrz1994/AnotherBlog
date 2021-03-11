@@ -9,7 +9,11 @@
         "Type": "LeastConnection"
       },
       "UpstreamPathTemplate": "/article/{everything}",
-      "Key": "Article"
+      "Key": "Article",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "OcelotKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
@@ -27,7 +31,11 @@
         "PeriodTimespan": 60,
         "Limit": 100
       },
-      "Key": "Comment"
+      "Key": "Comment",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "OcelotKey",
+        "AllowedScopes": []
+      }
     }
   ],
   "GlobalConfiguration": {
