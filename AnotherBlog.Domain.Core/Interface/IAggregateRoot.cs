@@ -1,4 +1,4 @@
-﻿using AnotherBlog.Domain.Core.Messages.Events;
+﻿using AnotherBlog.Domain.Core.Bus.Messages.Events;
 
 namespace AnotherBlog.Domain.Core.Interface
 {

@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div>
+    <input placeholder="account" value="" type="text" id="account">
+    <input placeholder="password" value="" type="password" id="password">
+    <button onclick="login()">Login</button>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+    var isLoading = false;
+    function login() {
+        if (isLoading == true) {
+            return;
+        }
+        isLoading = true;
+        $.ajax({
+            url: '/Account/LoginAsync',
+            type: 'Post',
+            dataType: 'json',
+            data: {
+                account: $("#account").val(),
+                password: $("#password").val()
+            },
+            success: function (res) {
+                isLoading = false;
+                if (res.isSuccess) {
+                    window.location.href = res.returnUrl;
+                } else {
+                    console.log(res);
+                }
+            }, error: function (error) {
+                isLoading = false;
+                console.log(error);
+            }
+        });
+    }
+</script>
+

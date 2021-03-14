@@ -11,7 +11,7 @@ namespace AnotherBlog.Domain.Core.Interface
         Task AddRangeAsync(IEnumerable<T> list);
         void Remove(T obj);
         void Update(T obj);
-        Task<T> GetByIdAsync(long id);
+        Task<T> GetByIdAsync(int id);
         Task<IList<T>> GetAllAsync();
     }
 }

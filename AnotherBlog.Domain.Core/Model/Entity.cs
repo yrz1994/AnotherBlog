@@ -1,11 +1,16 @@
-﻿using AnotherBlog.Domain.Core.Messages.Events;
+﻿using AnotherBlog.Domain.Core.Bus.Messages.Events;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AnotherBlog.Domain.Core.Model
 {
     public abstract class Entity
     {
-        public long Id { get; protected set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
+        public int Id { get; protected set; }
 
         #region DomainEvent
 

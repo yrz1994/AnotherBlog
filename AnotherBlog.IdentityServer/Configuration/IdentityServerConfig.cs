@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -18,7 +17,7 @@ namespace AnotherBlog.IdentityServer.Configuration
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            var connectionString = configuration.GetConnectionString("MySQLConnection");
+            var connectionString = configuration.GetConnectionString("IdentityConnection");
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
             var identityBuilder = services.AddIdentityServer(
@@ -32,24 +31,21 @@ namespace AnotherBlog.IdentityServer.Configuration
               // this adds the config data from DB (clients, resources)
               .AddConfigurationStore(options =>
               {
-                  options.ConfigureDbContext = builder => builder.UseMySql(connectionString,
-                      new MySqlServerVersion(new Version(8, 0, 23)), optionsBuilder => optionsBuilder
-                          .CharSetBehavior(CharSetBehavior.NeverAppend)
-                          .MigrationsAssembly(migrationsAssembly));
+                  options.ConfigureDbContext = builder => builder.UseMySQL(connectionString, contextBuilder => {
+                      contextBuilder.MigrationsAssembly(migrationsAssembly);
+                  });
               })
               // this adds the operational data from DB (codes, tokens, consents)
               .AddOperationalStore(options =>
               {
-                  options.ConfigureDbContext = builder => builder.UseMySql(connectionString, 
-                      new MySqlServerVersion(new Version(8, 0, 23)), optionsBuilder => optionsBuilder
-                        .CharSetBehavior(CharSetBehavior.NeverAppend)
-                        .MigrationsAssembly(migrationsAssembly));
+                  options.ConfigureDbContext = builder => builder.UseMySQL(connectionString, contextBuilder => {
+                      contextBuilder.MigrationsAssembly(migrationsAssembly);
+                  });
                   // this enables automatic token cleanup. this is optional.
                   options.EnableTokenCleanup = true;
                   options.TokenCleanupInterval = 3600;
-              });
-            identityBuilder.AddDeveloperSigningCredential();
-            //identityBuilder.AddSigningCredential(new X509Certificate2(configuration["Certificates:Path"], configuration["Certificates:Password"]));
+              })
+              .AddSigningCredential(new X509Certificate2(".\\Certificate\\ids.pfx", configuration["CertificatesPassword"]));
         }
 
         public static void InitIdentityServerDatabase(this IApplicationBuilder app)

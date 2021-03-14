@@ -1,4 +1,6 @@
+using AnotherBlog.Domain.Core.Bus;
 using AnotherBlog.IdentityServer.Configuration;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,7 +25,13 @@ namespace AnotherBlog.IdentityServer
 
             services.AddCorsPolicyConfiguration();
 
+            services.AddMediatR(typeof(Startup));
+
+            services.AddScoped<IMemoryBus, MemoryBus>();
+
             services.AddIdentityServerConfiguration(Configuration);
+
+            services.AddUserDataConfiguration(Configuration);
 
             services.AddControllersWithViews();
         }
@@ -38,9 +46,6 @@ namespace AnotherBlog.IdentityServer
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-
                 app.Use(async (context, next) =>
                 {
                     context.Request.Scheme = "https";

@@ -1,0 +1,22 @@
+﻿@model AnotherBlog.IdentityServer.ViewModels.LogoutViewModel
+@{
+    ViewData["Title"] = "Logout";
+}
+
+<h1>You have logged out.</h1>
+<button id="Return" onclick="ReturnBack()">Go back</button>
+
+<script>
+    function AutoRedirect(){
+        var autoRedirect = '@Model.AutomaticRedirectAfterSignOut';
+        if (autoRedirect == 'True' || autoRedirect == 'true') {
+            ReturnBack();
+        }
+    };
+    AutoRedirect();
+    function ReturnBack(){
+        var url = '@(Model.PostLogoutRedirectUri ?? "/")';
+        window.location.href = url;
+    }
+</script>
+
