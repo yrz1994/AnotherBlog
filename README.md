@@ -33,6 +33,7 @@ PM>Add-Migration initConfigurationDb -c ConfigurationDbContext -o Migrations/Ide
 PM>Update-Database -Context PersistedGrantDbContext
 PM>Update-Database -Context ConfigurationDbContext
 
+Administrator DB迁移(设置IdentityServer项目为启动项) 默认项目选择AnotherBlog.Infra.Data:
 PM>Add-Migration initUserDb -c UserContext -o Migrations/User/UserDb
 PM>Update-Database -Context UserContext
 

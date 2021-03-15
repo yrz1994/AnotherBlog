@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace AnotherBlog.IdentityServer.Migrations.User.UserDb
+namespace AnotherBlog.Infra.Data.Migrations.User.UserDb
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20210314102333_initUserDb")]
-    partial class initUserDb
+    [Migration("20210315102743_AddRequired")]
+    partial class AddRequired
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,14 +25,17 @@ namespace AnotherBlog.IdentityServer.Migrations.User.UserDb
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(16)
                         .HasColumnType("varchar(16)");
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasMaxLength(32)
                         .HasColumnType("varchar(32)");
 

@@ -12,7 +12,7 @@ namespace AnotherBlog.IdentityServer.Configuration
         public static void AddUserDataConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+            var migrationsAssembly = typeof(UserContext).GetTypeInfo().Assembly.GetName().Name;
             services.AddDbContext<UserContext>(options =>
             {
                 options.UseMySQL(configuration.GetConnectionString("IdentityConnection"), contextBuilder => {

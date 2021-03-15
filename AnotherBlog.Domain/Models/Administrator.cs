@@ -10,13 +10,16 @@ namespace AnotherBlog.Domain.Models
     {
         public Administrator() { }
 
+        [Required]
         [MaxLength(16)]
         public string Name { get; private set; }
 
+        [Required]
         [MaxLength(256)]
         [EmailAddress]
         public string Email { get; private set; }
 
+        [Required]
         [MaxLength(32)]
         public string Password { get; private set; }
     }

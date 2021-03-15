@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using MySql.EntityFrameworkCore.Metadata;
 
-namespace AnotherBlog.IdentityServer.Migrations.User.UserDb
+namespace AnotherBlog.Infra.Data.Migrations.User.UserDb
 {
     public partial class initUserDb : Migration
     {
