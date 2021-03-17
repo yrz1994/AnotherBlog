@@ -1,5 +1,7 @@
 using AnotherBlog.Domain.Core.Bus;
 using AnotherBlog.IdentityServer.Configuration;
+using AnotherBlog.IdentityServer.Filter;
+using AnotherBlog.Infra.Ioc;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,7 +35,12 @@ namespace AnotherBlog.IdentityServer
 
             services.AddUserDataConfiguration(Configuration);
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add(typeof(ModelValidateFilter));
+            });
+
+            NativeInjectorBootStrapper.RegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

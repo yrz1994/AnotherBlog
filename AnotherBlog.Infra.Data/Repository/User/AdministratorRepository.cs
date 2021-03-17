@@ -1,6 +1,6 @@
-﻿using AnotherBlog.Domain.Models;
+﻿using AnotherBlog.Domain.Interface.User;
+using AnotherBlog.Domain.Models;
 using AnotherBlog.Infra.Data.DBContext;
-using AnotherBlog.Infra.Data.Interface.User;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 

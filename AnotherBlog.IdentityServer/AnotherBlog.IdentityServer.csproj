@@ -21,7 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AnotherBlog.Application\AnotherBlog.Application.csproj" />
     <ProjectReference Include="..\AnotherBlog.Infra.Data\AnotherBlog.Infra.Data.csproj" />
+    <ProjectReference Include="..\AnotherBlog.Infra.Ioc\AnotherBlog.Infra.Ioc.csproj" />
   </ItemGroup>
 
 </Project>

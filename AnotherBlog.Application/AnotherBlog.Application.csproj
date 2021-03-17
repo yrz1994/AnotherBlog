@@ -4,4 +4,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AnotherBlog.Domain.Core\AnotherBlog.Domain.Core.csproj" />
+    <ProjectReference Include="..\AnotherBlog.Domain\AnotherBlog.Domain.csproj" />
+    <ProjectReference Include="..\AnotherBlog.Infra.Utility\AnotherBlog.Infra.Utility.csproj" />
+  </ItemGroup>
+
 </Project>

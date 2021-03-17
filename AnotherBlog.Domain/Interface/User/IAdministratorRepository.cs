@@ -2,7 +2,7 @@
 using AnotherBlog.Domain.Models;
 using System.Threading.Tasks;
 
-namespace AnotherBlog.Infra.Data.Interface.User
+namespace AnotherBlog.Domain.Interface.User
 {
     public interface IAdministratorRepository : IRepository<Administrator>
     {
