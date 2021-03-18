@@ -1,4 +1,5 @@
-# AnotherBlog ![MIT](https://img.shields.io/github/license/yrz1994/AnotherBlog)
+# AnotherBlog 
+![MIT](https://img.shields.io/github/license/yrz1994/AnotherBlog)
 
 Another Blog是一个采用微服务架构的练手项目，前端使用[Blazor Webassembly](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)开发（待开发），后端服务使用[.NET 5](https://dotnet.microsoft.com/download/dotnet/5.0)开发。实体模型采用DDD思想进行建模，并通过MediatR实现CQRS。
 
