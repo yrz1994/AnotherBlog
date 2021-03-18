@@ -1,14 +1,30 @@
 ﻿
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "登录";
 }
 
 <div>
-    <input placeholder="account" value="" type="text" id="account">
-    <input placeholder="password" value="" type="password" id="password">
-    <button onclick="login()">Login</button>
+    <div class="image">
+        <img src="~/css/background.jpg" />
+    </div>
+    <div class="login">
+        <div class="header">
+            欢迎登录
+        </div>
+        <div class="input">
+            <div class="input-border">
+                <input type="text" class="border" name="username" id="account" placeholder="username">
+            </div>
+            <div class="input-border">
+                <input type="password" class="border" name="password" id="password" placeholder="password">
+            </div>
+        </div>
+        <div class="action">
+            <div class="btn-login" onclick="login()">login</div>
+        </div>
+    </div>
 </div>
-
+<link href="~/css/login.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
     var isLoading = false;

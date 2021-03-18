@@ -1,10 +1,22 @@
 ﻿@model AnotherBlog.IdentityServer.ViewModels.LogoutViewModel
 @{
-    ViewData["Title"] = "Logout";
+    ViewData["Title"] = "登出";
 }
 
-<h1>You have logged out.</h1>
-<button id="Return" onclick="ReturnBack()">Go back</button>
+<div>
+    <div class="image">
+        <img src="~/css/background.jpg" />
+    </div>
+    <div class="login">
+        <div class="header">
+            您已退出登录
+        </div>
+        <div class="action">
+            <div class="btn-login" onclick="ReturnBack()">返回</div>
+        </div>
+    </div>
+</div>
+<link href="~/css/login.css" rel="stylesheet" />
 
 <script>
     function AutoRedirect(){

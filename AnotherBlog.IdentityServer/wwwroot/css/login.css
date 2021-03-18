@@ -1,0 +1,89 @@
+﻿/*CSS From https://www.jianshu.com/p/4e28b5e84f77 */
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image img {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+}
+
+.login {
+    width: 300px;
+    background-color: rgba(69, 72, 77, 0.40);
+    color: aliceblue;
+    border-radius: 8px;
+    padding: 50px;
+}
+
+    .login .header {
+        text-align: center;
+        font-size: 30px;
+        line-height: 100px;
+    }
+
+    .login .input input {
+        background-color: rgb(41, 45, 62);
+        border: 0px;
+        width: 100%;
+        text-align: center;
+        font-size: 15px;
+        color: aliceblue;
+        outline: none;
+    }
+
+        .login .input input::placeholder {
+            text-transform: uppercase;
+        }
+
+    .login .input-border {
+        background-image: linear-gradient(to right, #ffffff, #4a4a49);
+        height: 45px;
+        width: 100%;
+        margin-bottom: 20px;
+        border-radius: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: .3s;
+    }
+
+        .login .input-border .border {
+            height: calc(100% - 4px);
+            width: calc(100% - 4px);
+            border-radius: 25px;
+            font-size: 14px;
+        }
+
+    .login .btn-login {
+        width: 60%;
+        border: 2px solid #7f8184;
+        margin: 0 auto;
+        text-align: center;
+        line-height: 40px;
+        text-transform: uppercase;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: .3s;
+    }
+
+        .login .btn-login:hover {
+            background-color: rgb(41, 45, 62);
+        }
