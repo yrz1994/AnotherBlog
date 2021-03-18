@@ -1,32 +1,32 @@
-# AnotherBlog
+# AnotherBlog ![MIT](https://img.shields.io/github/license/yrz1994/AnotherBlog)
 
-Another BlogÊÇÒ»¸ö²ÉÓÃÎ¢·þÎñ¼Ü¹¹µÄÁ·ÊÖÏîÄ¿£¬Ç°¶ËÊ¹ÓÃ[Blazor Webassembly](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)¿ª·¢£¨´ý¿ª·¢£©£¬ºó¶Ë·þÎñÊ¹ÓÃ[.NET 5](https://dotnet.microsoft.com/download/dotnet/5.0)¿ª·¢¡£ÊµÌåÄ£ÐÍ²ÉÓÃDDDË¼Ïë½øÐÐ½¨Ä££¬²¢Í¨¹ýMediatRÊµÏÖCQRS¡£
+Another Blogæ˜¯ä¸€ä¸ªé‡‡ç”¨å¾®æœåŠ¡æž¶æž„çš„ç»ƒæ‰‹é¡¹ç›®ï¼Œå‰ç«¯ä½¿ç”¨[Blazor Webassembly](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)å¼€å‘ï¼ˆå¾…å¼€å‘ï¼‰ï¼ŒåŽç«¯æœåŠ¡ä½¿ç”¨[.NET 5](https://dotnet.microsoft.com/download/dotnet/5.0)å¼€å‘ã€‚å®žä½“æ¨¡åž‹é‡‡ç”¨DDDæ€æƒ³è¿›è¡Œå»ºæ¨¡ï¼Œå¹¶é€šè¿‡MediatRå®žçŽ°CQRSã€‚
 
- - Ê¹ÓÃ[Ocelot](https://github.com/ThreeMammals/Ocelot)×÷Îª¾ÛºÏÍø¹Ø£»
- - Ê¹ÓÃ[Consul](https://www.consul.io/)½øÐÐ·þÎñ×¢²áÓë·¢ÏÖ£»
- - Ê¹ÓÃ[IdentityServer4](https://github.com/IdentityServer/IdentityServer4/blob/main/docs/index.rst)½øÐÐ¹ÜÀíÔ±½ÇÉ«µÄÈÏÖ¤ÊÚÈ¨£»
- - Êý¾Ý¿âÊ¹ÓÃMySQL£»
- - Ê¹ÓÃDockerÈÝÆ÷»¯²¿Êð£»
+ - ä½¿ç”¨[Ocelot](https://github.com/ThreeMammals/Ocelot)ä½œä¸ºèšåˆç½‘å…³ï¼›
+ - ä½¿ç”¨[Consul](https://www.consul.io/)è¿›è¡ŒæœåŠ¡æ³¨å†Œä¸Žå‘çŽ°ï¼›
+ - ä½¿ç”¨[IdentityServer4](https://github.com/IdentityServer/IdentityServer4/blob/main/docs/index.rst)è¿›è¡Œç®¡ç†å‘˜è§’è‰²çš„è®¤è¯æŽˆæƒï¼›
+ - æ•°æ®åº“ä½¿ç”¨MySQLï¼›
+ - ä½¿ç”¨Dockerå®¹å™¨åŒ–éƒ¨ç½²ï¼›
 
-²¿Êð½Å±¾£º
+éƒ¨ç½²è„šæœ¬ï¼š
 ```
-/*Æô¶¯²âÊÔ»·¾³MySQLÈÝÆ÷*/
+/*å¯åŠ¨æµ‹è¯•çŽ¯å¢ƒMySQLå®¹å™¨*/
 docker pull mysql:latest
 docker run -d -p 3306:3306 --name MySQL 
 			-v mysql_volume:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456
 			mysql:latest
 
-/*Æô¶¯Consul: */
+/*å¯åŠ¨Consul: */
 docker-compose up -d
 
-/*±àÒë·þÎñ¾µÏñ: */
+/*ç¼–è¯‘æœåŠ¡é•œåƒ: */
 docker build -t article_service:dev -f .\AnotherBlog.ArticleAPI\Dockerfile .
 docker build -t comment_service:dev -f .\AnotherBlog.CommentAPI\Dockerfile .
 
-/*Æô¶¯·þÎñ: */
-docker run -d -p 5010:80 ¡ªname article_service_1 article_service:dev ¡ªscheme="http" ¡ªip="host.docker.internal" ¡ªport="5010"
+/*å¯åŠ¨æœåŠ¡: */
+docker run -d -p 5010:80 â€”name article_service_1 article_service:dev â€”scheme="http" â€”ip="host.docker.internal" â€”port="5010"
 
-docker run -d -p 5020:80 ¡ªname comment_service_1 comment_service:dev ¡ªscheme="http" ¡ªip="host.docker.internal" ¡ªport="5020"
+docker run -d -p 5020:80 â€”name comment_service_1 comment_service:dev â€”scheme="http" â€”ip="host.docker.internal" â€”port="5020"
 ```
 
 ```sql
@@ -35,7 +35,7 @@ CREATE SCHEMA `identity` DEFAULT CHARACTER SET utf8mb4 ;
 ```
 
 ```
-/*IdentityServer DBÇ¨ÒÆ(ÉèÖÃIdentityServerÏîÄ¿ÎªÆô¶¯Ïî):*/
+/*IdentityServer DBè¿ç§»(è®¾ç½®IdentityServeré¡¹ç›®ä¸ºå¯åŠ¨é¡¹):*/
 PM>Add-Migration initPersistedGrantDb -c PersistedGrantDbContext -o Migrations/IdentityServer/PersistedGrantDb
 
 PM>Add-Migration initConfigurationDb -c ConfigurationDbContext -o Migrations/IdentityServer/ConfigurationDb
@@ -44,8 +44,8 @@ PM>Update-Database -Context PersistedGrantDbContext
 
 PM>Update-Database -Context ConfigurationDbContext
 
-/*Administrator DBÇ¨ÒÆ(ÉèÖÃIdentityServerÏîÄ¿ÎªÆô¶¯Ïî) 
-Ä¬ÈÏÏîÄ¿Ñ¡ÔñAnotherBlog.Infra.Data:*/
+/*Administrator DBè¿ç§»(è®¾ç½®IdentityServeré¡¹ç›®ä¸ºå¯åŠ¨é¡¹) 
+é»˜è®¤é¡¹ç›®é€‰æ‹©AnotherBlog.Infra.Data:*/
 PM>Add-Migration initUserDb -c UserContext -o Migrations/User/UserDb
 
 PM>Update-Database -Context UserContext
