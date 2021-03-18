@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Reflection;
 
-namespace AnotherBlog.IdentityServer.Configuration
+namespace AnotherBlog.Infra.Ioc
 {
     public static class UserDataConfig
     {

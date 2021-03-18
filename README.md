@@ -51,6 +51,12 @@ PM>Update-Database -Context ConfigurationDbContext
 PM>Add-Migration initUserDb -c UserContext -o Migrations/User/UserDb
 
 PM>Update-Database -Context UserContext
+
+/*Blog DB迁移(设置AritcleAPI项目为启动项) 
+默认项目选择AnotherBlog.Infra.Data:*/
+PM>Add-Migration initBlogDb -c BlogContext -o Migrations/Blog
+
+PM>Update-Database -Context BlogContext
 ```
 
 ```

@@ -1,4 +1,5 @@
 using AnotherBlog.Infra.ConsulRegister;
+using AnotherBlog.Infra.Ioc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,10 +22,13 @@ namespace AnotherBlog.ArticleAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Article.WebAPI", Version = "v1" });
             });
+
+            NativeInjectorBootStrapper.RegisterServices(services, Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

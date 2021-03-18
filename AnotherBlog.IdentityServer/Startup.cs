@@ -27,14 +27,12 @@ namespace AnotherBlog.IdentityServer
 
             services.AddIdentityServerConfiguration(Configuration);
 
-            services.AddUserDataConfiguration(Configuration);
-
             services.AddControllersWithViews(options =>
             {
                 options.Filters.Add(typeof(ModelValidateFilter));
             });
 
-            NativeInjectorBootStrapper.RegisterServices(services);
+            NativeInjectorBootStrapper.RegisterServices(services, Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

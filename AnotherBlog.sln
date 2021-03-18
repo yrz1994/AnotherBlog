@@ -56,7 +56,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnotherBlog.Application", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnotherBlog.Infra.Data", "AnotherBlog.Infra.Data\AnotherBlog.Infra.Data.csproj", "{866127A5-3897-4563-B76E-61DF651C8F92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnotherBlog.Infra.Ioc", "AnotherBlog.Infra.Ioc\AnotherBlog.Infra.Ioc.csproj", "{677264EF-2BE4-4BEA-8AB1-9CCA0B3F0CCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnotherBlog.Infra.Ioc", "AnotherBlog.Infra.Ioc\AnotherBlog.Infra.Ioc.csproj", "{677264EF-2BE4-4BEA-8AB1-9CCA0B3F0CCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
