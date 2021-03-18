@@ -1,4 +1,7 @@
-﻿using AnotherBlog.IdentityServer.ViewModels;
+﻿using AnotherBlog.Application.Interface;
+using AnotherBlog.Application.Request;
+using AnotherBlog.Application.Response;
+using AnotherBlog.IdentityServer.ViewModels;
 using IdentityServer4;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Authentication;
@@ -14,11 +17,13 @@ namespace AnotherBlog.IdentityServer.Controllers
     public class AccountController : Controller
     {
         private readonly string _returnUrlKey = "return_url";
+        private readonly IAdminAppService _adminAppService;
         private readonly IIdentityServerInteractionService _interaction;
 
-        public AccountController(IIdentityServerInteractionService interaction)
+        public AccountController(IIdentityServerInteractionService interaction, IAdminAppService adminAppService)
         {
             _interaction = interaction;
+            _adminAppService = adminAppService;
         }
 
         public IActionResult Login(string returnUrl)
@@ -29,6 +34,28 @@ namespace AnotherBlog.IdentityServer.Controllers
                 Expires = DateTime.Now.AddMinutes(1)
             });
             return View();
+        }
+
+        [HttpPost]
+        [Route("/Account/LoginAsync")]
+        public async Task<IActionResult> LoginAsync(AdminLoginRequest request)
+        {
+            var loginResult = await _adminAppService.AdmainLogin(request);
+            if (loginResult.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                return Ok(loginResult);
+            }
+            var claim = new List<Claim>()
+            {
+                new Claim(type : "Role", value : "Admin")
+            };
+            var identityUser = new IdentityServerUser(request.Email)
+            {
+                DisplayName = request.Email.Split("@")[0],
+                AdditionalClaims = claim
+            };
+            await HttpContext.SignInAsync(identityUser);
+            return Ok(DataResponse<string>.Success(HttpContext.Request.Cookies[_returnUrlKey]));
         }
 
         public async Task<IActionResult> Logout(string logoutId)
@@ -43,37 +70,6 @@ namespace AnotherBlog.IdentityServer.Controllers
             };
             await HttpContext.SignOutAsync();
             return View(vm);
-        }
-
-        /// <summary>
-        /// 账号密码登录
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        [HttpPost]
-        [Route("/[controller]/LoginAsync")]
-        public async Task<IActionResult> LoginAsync(LoginViewModel model)
-        {
-            if (string.IsNullOrWhiteSpace(model.Account))
-            {
-                return Json(new { isSuccess = false, message = "请输入用户名" });
-            }
-            if (string.IsNullOrWhiteSpace(model.Password))
-            {
-                return Json(new { isSuccess = false, message = "请输入密码" });
-            }
-            var claim = new List<Claim>()
-            {
-                new Claim(type : "Role", value : "Admin")
-            };
-            var identityUser = new IdentityServerUser(model.Account)
-            {
-                DisplayName = model.Account,
-                AdditionalClaims = claim
-            };
-            await HttpContext.SignInAsync(identityUser);
-            var returnUrl = HttpContext.Request.Cookies[_returnUrlKey];
-            return Json(new { isSuccess = true, returnUrl = returnUrl, message = "Success." });
         }
     }
 }

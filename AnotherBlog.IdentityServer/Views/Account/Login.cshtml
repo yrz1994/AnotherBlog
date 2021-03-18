@@ -22,15 +22,15 @@
             type: 'Post',
             dataType: 'json',
             data: {
-                account: $("#account").val(),
+                email: $("#account").val(),
                 password: $("#password").val()
             },
             success: function (res) {
                 isLoading = false;
-                if (res.isSuccess) {
-                    window.location.href = res.returnUrl;
+                if (res.statusCode == 200) {
+                    window.location.href = res.data;
                 } else {
-                    console.log(res);
+                    alert(res.errorMsg);
                 }
             }, error: function (error) {
                 isLoading = false;

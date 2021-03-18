@@ -1,14 +1,14 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 
-namespace AnotherBlog.Infra.Ioc
+namespace AnotherBlog.Application
 {
     public static class ApplicationServiceCollectionExtensions
     {
         public static IServiceCollection AddApplicationService(this IServiceCollection serviceCollection)
         {
             const string servicesEndsWith = "AppService";
-            var localServices = typeof(ServiceCollectionExtensions).Assembly.GetTypes().Where(t => t.Name.EndsWith(servicesEndsWith) && t.GetInterfaces().Any(i => i.Name.EndsWith(servicesEndsWith))).ToList();
+            var localServices = typeof(ApplicationServiceCollectionExtensions).Assembly.GetTypes().Where(t => t.Name.EndsWith(servicesEndsWith) && t.GetInterfaces().Any(i => i.Name.EndsWith(servicesEndsWith))).ToList();
             if (localServices.Count > 0)
             {
                 foreach (var item in localServices)

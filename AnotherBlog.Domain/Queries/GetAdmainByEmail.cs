@@ -1,4 +1,6 @@
-﻿using AnotherBlog.Domain.Interface.User;
+﻿using AnotherBlog.Domain.Core.Bus.Handler;
+using AnotherBlog.Domain.Core.Bus.Messages.Queries;
+using AnotherBlog.Domain.Interface.User;
 using AnotherBlog.Domain.Models;
 using MediatR;
 using System.Threading;
@@ -6,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AnotherBlog.Domain.Queries
 {
-    public class GetAdmainByEmail : IRequest<Administrator>
+    public class GetAdmainByEmail : Query<Administrator>
     {
         public GetAdmainByEmail(string email)
         {
@@ -16,7 +18,7 @@ namespace AnotherBlog.Domain.Queries
         public string Email { get; set; }
     }
 
-    public class GetAdmainByEmailHandler : IRequestHandler<GetAdmainByEmail, Administrator>
+    public class GetAdmainByEmailHandler : QueryHandler, IRequestHandler<GetAdmainByEmail, Administrator>
     {
         private readonly IAdministratorRepository _administratorRepository;
         public GetAdmainByEmailHandler(IAdministratorRepository administratorRepository)

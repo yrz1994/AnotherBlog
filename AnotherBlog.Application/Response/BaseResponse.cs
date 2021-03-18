@@ -14,5 +14,31 @@ namespace AnotherBlog.Application.Response
             StatusCode = statusCode;
             ErrorMsg = errorMsg;
         }
+
+        public static BaseResponse Error(string errorMsg)
+        {
+            return new BaseResponse
+            {
+                StatusCode = HttpStatusCode.InternalServerError,
+                ErrorMsg = errorMsg
+            };
+        }
+
+        public static BaseResponse BadRequest(string errorMsg)
+        {
+            return new BaseResponse
+            {
+                StatusCode = HttpStatusCode.BadRequest,
+                ErrorMsg = errorMsg
+            };
+        }
+
+        public static BaseResponse Success()
+        {
+            return new BaseResponse
+            {
+                StatusCode = HttpStatusCode.OK
+            };
+        }
     }
 }

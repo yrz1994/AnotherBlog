@@ -1,8 +1,6 @@
-using AnotherBlog.Domain.Core.Bus;
 using AnotherBlog.IdentityServer.Configuration;
 using AnotherBlog.IdentityServer.Filter;
 using AnotherBlog.Infra.Ioc;
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,10 +24,6 @@ namespace AnotherBlog.IdentityServer
             services.AddCookieConfiguration();
 
             services.AddCorsPolicyConfiguration();
-
-            services.AddMediatR(typeof(Startup));
-
-            services.AddScoped<IMemoryBus, MemoryBus>();
 
             services.AddIdentityServerConfiguration(Configuration);
 
@@ -60,7 +54,7 @@ namespace AnotherBlog.IdentityServer
                 });
             }
 
-            app.InitIdentityServerDatabase();
+            //app.InitIdentityServerDatabase();
 
             app.UseCorsPolicy();
 

@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using AnotherBlog.Application;
+using AnotherBlog.Domain;
+using AnotherBlog.Infra.Data;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace AnotherBlog.Infra.Ioc
@@ -11,7 +14,12 @@ namespace AnotherBlog.Infra.Ioc
 
             services.AddAutoMapperConfiguration();
 
+            services.AddRepository();
+
+            services.AddMediatR();
+
             services.AddApplicationService();
+         
         }
     }
 }
