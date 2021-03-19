@@ -67,7 +67,6 @@ PM>Update-Database -Context BlogContext
 	openssl req -new -x509 -key private_ids.key -days 3650 -out public_ids.crt
 3.Export .pfx
 	openssl pkcs12 -export -in public_ids.crt -inkey private_ids.key -out ids.pfx
-4.Set export password:
-	123456 (For Demo)
+4.Set export password:123456
 ```
 
