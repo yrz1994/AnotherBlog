@@ -1,4 +1,5 @@
 # AnotherBlog 
+![CI](https://img.shields.io/github/workflow/status/yrz1994/AnotherBlog/AnotherBlogCI)
 ![MIT](https://img.shields.io/github/license/yrz1994/AnotherBlog)
 ![Github](https://img.shields.io/github/stars/yrz1994/AnotherBlog?style=social)
 
